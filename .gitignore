@@ -1,6 +1,7 @@
 # ignore all files starting with . or ~
 .*
 ~*
+config.yml
 
 # ignore project files/directories
 node_modules/
