@@ -1,9 +1,9 @@
 # ignore all files starting with . or ~
 .*
 ~*
-config.yml
 
 # ignore project files/directories
+config.yml
 node_modules/
 dev/package-lock.json
 
