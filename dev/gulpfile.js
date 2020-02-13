@@ -9,16 +9,18 @@ const csslint = require('gulp-csslint');
 const rename = require("gulp-rename");
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
+const touch = require("gulp-touch-cmd");
 
 /**
  * SCSS task
  */
 gulp.task('css', function () {
-    gulp.src('scss/**/*.scss.liquid')
+    return gulp.src('scss/**/*.scss.liquid')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({ cascade : false }))
         .pipe(rename('theme.scss.liquid'))
-        .pipe(gulp.dest('../assets/'));
+        .pipe(gulp.dest('../assets/'))
+        .pipe(touch());
 });
 
 /**
@@ -63,16 +65,6 @@ gulp.task('fonts', function () {
         .pipe(changed('../assets/')) // ignore unchanged files
         .pipe(gulp.dest('../assets/'))
 });
-
-/**
- * Watch task
- */
-// gulp.task('watch', function () {
-//     gulp.watch('scss/**/*.scss', ['css']);
-//     gulp.watch('js/*.js', ['js']);
-//     gulp.watch('image/*.{jpg,jpeg,png,gif,svg}', ['images']);
-//     gulp.watch('font/*.{eot,svg,ttf,woff,woff2}', ['fonts']);
-// });
 
 gulp.task('watch', function () {
     gulp.watch('scss/**/*.scss', gulp.series('css'));
